@@ -140,6 +140,7 @@ export class Fonts {
     }
 
     if (didUpdate) {
+      console.log("didUpdate");
       this.scene.triggerUpdate();
     }
   };

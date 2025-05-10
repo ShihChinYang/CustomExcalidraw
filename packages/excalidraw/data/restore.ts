@@ -728,7 +728,7 @@ export const restoreAppState = (
         ? localValue
         : defaultValue;
   }
-
+  console.log("forBSafes:", nextAppState.forBSafes);
   return {
     ...nextAppState,
     cursorButton: localAppState?.cursorButton || "up",

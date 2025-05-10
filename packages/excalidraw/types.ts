@@ -253,6 +253,7 @@ export type ObservedElementsAppState = {
 };
 
 export interface AppState {
+  forBSafes: boolean,
   contextMenu: {
     items: ContextMenuItems;
     top: number;

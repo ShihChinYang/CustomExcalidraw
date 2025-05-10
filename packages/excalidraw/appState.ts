@@ -63,6 +63,7 @@ export const getDefaultAppState = (): Omit<
     exportEmbedScene: false,
     exportWithDarkMode: false,
     fileHandle: null,
+    forBSafes: false,
     gridSize: DEFAULT_GRID_SIZE,
     gridStep: DEFAULT_GRID_STEP,
     gridModeEnabled: false,

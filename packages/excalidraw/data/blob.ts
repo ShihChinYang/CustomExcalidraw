@@ -159,6 +159,7 @@ export const loadSceneOrLibraryFromBlob = async (
           {
             elements: clearElementsForExport(data.elements || []),
             appState: {
+              forBSafes: true,
               theme: localAppState?.theme,
               fileHandle: fileHandle || blob.handle || null,
               ...cleanAppStateForExport(data.appState || {}),
