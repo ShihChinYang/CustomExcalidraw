@@ -254,6 +254,7 @@ export type ObservedElementsAppState = {
 
 export interface AppState {
   forBSafes: boolean,
+  forBSafesImageMaxWidthOrHeight: number,
   contextMenu: {
     items: ContextMenuItems;
     top: number;

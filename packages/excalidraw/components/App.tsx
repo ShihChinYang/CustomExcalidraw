@@ -9838,7 +9838,7 @@ class App extends React.Component<AppProps, AppState> {
       throw new Error(t("errors.imageInsertError"));
     }
     const forBSafes = this.state.forBSafes;
-    const maxWidthOrHeight = forBSafes ? 640 : DEFAULT_MAX_IMAGE_WIDTH_OR_HEIGHT;
+    const maxWidthOrHeight = forBSafes ? (this.state.forBSafesImageMaxWidthOrHeight||640) : DEFAULT_MAX_IMAGE_WIDTH_OR_HEIGHT;
     const existingFileData = this.files[fileId];
     if (!existingFileData?.dataURL) {
       try {

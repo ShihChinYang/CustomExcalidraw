@@ -4,6 +4,7 @@ import {
   DEFAULT_ELEMENT_PROPS,
   DEFAULT_FONT_FAMILY,
   DEFAULT_FONT_SIZE,
+  DEFAULT_MAX_IMAGE_WIDTH_OR_HEIGHT,
   DEFAULT_TEXT_ALIGN,
   DEFAULT_GRID_SIZE,
   EXPORT_SCALES,
@@ -64,6 +65,7 @@ export const getDefaultAppState = (): Omit<
     exportWithDarkMode: false,
     fileHandle: null,
     forBSafes: false,
+    forBSafesImageMaxWidthOrHeight: DEFAULT_MAX_IMAGE_WIDTH_OR_HEIGHT,
     gridSize: DEFAULT_GRID_SIZE,
     gridStep: DEFAULT_GRID_STEP,
     gridModeEnabled: false,
@@ -142,6 +144,8 @@ const APP_STATE_STORAGE_CONF = (<
   T extends Record<keyof AppState, Values>,
 >(config: { [K in keyof T]: K extends keyof AppState ? T[K] : never }) =>
   config)({
+  forBSafes: { browser: true, export: true, server: true },
+  forBSafesImageMaxWidthOrHeight: { browser: true, export: true, server: true },
   showWelcomeScreen: { browser: true, export: false, server: false },
   theme: { browser: true, export: false, server: false },
   collaborators: { browser: false, export: false, server: false },
