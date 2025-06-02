@@ -49,12 +49,12 @@ export class Fonts {
 
   private static _registered:
     | Map<
-        number,
-        {
-          metadata: FontMetadata;
-          fontFaces: ExcalidrawFontFace[];
-        }
-      >
+      number,
+      {
+        metadata: FontMetadata;
+        fontFaces: ExcalidrawFontFace[];
+      }
+    >
     | undefined;
 
   private static _initialized: boolean = false;
@@ -63,7 +63,7 @@ export class Fonts {
     // lazy load the font registration
     if (!Fonts._registered) {
       Fonts._registered = Fonts.init();
-    } else if (!Fonts._initialized) {
+    } else {
       // case when host app register fonts before they are lazy loaded
       // don't override whatever has been previously registered
       Fonts._registered = new Map([
@@ -327,11 +327,11 @@ export class Fonts {
     this:
       | Fonts
       | {
-          registered: Map<
-            number,
-            { metadata: FontMetadata; fontFaces: ExcalidrawFontFace[] }
-          >;
-        },
+        registered: Map<
+          number,
+          { metadata: FontMetadata; fontFaces: ExcalidrawFontFace[] }
+        >;
+      },
     family: string,
     metadata: FontMetadata,
     ...fontFacesDecriptors: ExcalidrawFontFaceDescriptor[]
@@ -400,6 +400,43 @@ export class Fonts {
     Fonts._initialized = true;
 
     return fonts.registered;
+  }
+
+  public static registerCustomFont(family: string,
+    ...fontFacesDescriptors: ExcalidrawFontFaceDescriptor[]) {
+
+    const fonts = {
+      registered: new Map<
+        ValueOf<typeof FONT_FAMILY | typeof FONT_FAMILY_FALLBACKS>,
+        { metadata: FontMetadata; fontFaces: ExcalidrawFontFace[] }
+      >(),
+    };
+    const init = (
+      family: string,
+      ...fontFacesDescriptors: ExcalidrawFontFaceDescriptor[]
+    ) => {
+      const fontFamily = Math.max(...Object.values(FONT_FAMILY)) + 1
+      // @ts-ignore:
+      FONT_FAMILY[family] = fontFamily;
+
+      // default to Excalifont metrics
+      const metadata = FONT_METADATA[FONT_FAMILY.Excalifont];
+
+      Fonts.register.call(fonts, family, metadata, ...fontFacesDescriptors);
+    };
+
+    init(family, ...fontFacesDescriptors);
+
+    if (!Fonts._registered) {
+      Fonts._registered = fonts.registered;
+    } else {
+      // case when host app register fonts before they are lazy loaded
+      // don't override whatever has been previously registered
+      Fonts._registered = new Map([
+        ...fonts.registered.entries(),
+        ...Fonts._registered.entries(),
+      ]);
+    }
   }
 
   /**
