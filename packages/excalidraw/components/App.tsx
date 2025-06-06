@@ -6580,7 +6580,8 @@ class App extends React.Component<AppProps, AppState> {
     });
     console.log(`savePointer: ${event.clientX}, ${event.clientY}`);
     this.savePointer(event.clientX, event.clientY, "down");
-
+    this.lastViewportPosition.x = event.clientX;
+    this.lastViewportPosition.y = event.clientY;
     if (
       event.button === POINTER_BUTTON.ERASER &&
       this.state.activeTool.type !== TOOL_TYPE.eraser
