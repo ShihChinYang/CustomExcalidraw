@@ -3256,10 +3256,11 @@ class App extends React.Component<AppProps, AppState> {
   }) => {
     const elements = restoreElements(opts.elements, null, undefined);
     const [minX, minY, maxX, maxY] = getCommonBounds(elements);
-
+    console.log(`mixX:${minX}, minY:${minY}, maxX:${maxX}, maxY:${maxY}`);
     const elementsCenterX = distance(minX, maxX) / 2;
     const elementsCenterY = distance(minY, maxY) / 2;
-
+    console.log(`elementsCenterX:${elementsCenterX}, elementsCenterY:${elementsCenterY} `);
+    console.log(`opts.position: ${opts.position}`);
     let clientX =
       typeof opts.position === "object"
         ? opts.position.clientX
@@ -3274,6 +3275,7 @@ class App extends React.Component<AppProps, AppState> {
           : this.state.height / 2 + this.state.offsetTop;
     if (clientX < 30) clientX = 160;
     if (clientY < 30) clientY = 160;
+    console.log(`clientX:${clientX}, clientY:${clientY}`)
     const { x, y } = viewportCoordsToSceneCoords(
       { clientX, clientY },
       this.state,
@@ -6576,6 +6578,7 @@ class App extends React.Component<AppProps, AppState> {
       lastPointerDownWith: event.pointerType,
       cursorButton: "down",
     });
+    console.log(`savePointer: ${event.clientX}, ${event.clientY}`);
     this.savePointer(event.clientX, event.clientY, "down");
 
     if (
