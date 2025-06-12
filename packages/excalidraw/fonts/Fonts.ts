@@ -424,7 +424,15 @@ export class Fonts {
 
       Fonts.register.call(fonts, family, metadata, ...fontFacesDescriptors);
     };
-
+    let fontExisted = false;
+    for(const [key, value] of Fonts.registered.entries()) {
+      console.log(`${value.fontFaces[0].fontFace.family} exists`);
+      if(value.fontFaces[0].fontFace.family === family) {
+        fontExisted = true;
+        console.log(`Custom font ${family} already exists`);
+      } 
+    }
+    if(fontExisted) return;
     init(family, ...fontFacesDescriptors);
 
     if (!Fonts._registered) {
