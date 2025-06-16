@@ -4028,6 +4028,7 @@ class App extends React.Component<AppProps, AppState> {
                 console.log("didUpdate");
                 this.scene.triggerUpdate();
               }
+              localStorage.setItem("sceneUpdated", "true");
             }
             Fonts.loadElementsFonts(nextElements).then(() => {
               //this.fonts.onLoaded(fontFaces);
